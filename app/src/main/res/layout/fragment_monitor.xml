@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".monitorActivity" >
+    tools:context=".MonitorFragment" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,7 +114,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Realtime pace" />
+            android:text="@string/realtime_pace_label" />
 
         <TextView
             android:id="@+id/tvMonitorElapsedTimeName"
@@ -122,7 +122,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Elapsed time" />
+            android:text="@string/elapsed_time_label" />
 
         <TextView
             android:id="@+id/tvMonitorCalorieName"
@@ -130,7 +130,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Calorie" />
+            android:text="@string/calories_label" />
 
 
     </LinearLayout>
@@ -168,7 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="stop" />
+            android:text="@string/stop_button" />
 
         <Button
             android:id="@+id/btnPauseContinue"
@@ -176,7 +176,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="continue/pause" />
+            android:text="@string/start_pause_button" />
     </LinearLayout>
 
 

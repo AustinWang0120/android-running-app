@@ -4,14 +4,30 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_body_info.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/activity_detail_of_single_run.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_group_of_runs.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.16134751773049646" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_me.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_monitor.xml" value="0.18229166666666666" />
+        <entry key="app/src/main/res/layout/activity_one_for_all.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/activity_post.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/activity_report.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_run_prepare.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/activity_set_goal.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/blank_page_no_record.xml" value="0.16134751773049646" />
         <entry key="app/src/main/res/layout/fragment_following_post.xml" value="0.18229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/fragment_monitor.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_spotify.xml" value="0.335" />
         <entry key="app/src/main/res/layout/inner_lv.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_dropdown.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/layout/item_select.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/layout/message.xml" value="0.13451086956521738" />
+        <entry key="app/src/main/res/layout/outer_records.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/layout/post_lv.xml" value="0.18229166666666666" />
         <entry key="app/src/main/res/layout/setting_lv.xml" value="0.13451086956521738" />
       </map>

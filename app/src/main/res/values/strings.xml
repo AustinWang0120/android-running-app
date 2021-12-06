@@ -2,9 +2,9 @@
     <string name="app_name">Joggr</string>
 
     <!-- TODO: Remove or change all placeholder texts -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_maps">MapsActivity</string>
-    <string name="title_activity_report">reportActivity</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
+    <string name="title_activity_report" translatable="false">ReportActivity</string>
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
     <string name="login_button">Login</string>
@@ -22,4 +22,31 @@
     <string name="save_button">Save</string>
     <string name="test_checkbox">Test</string>
     <string name="change_password_button">Change Password</string>
+    <string name="enter_message_hint">Enter Message</string>
+    <string name="duration_label">Duration</string>
+    <string name="calories_label">Calories</string>
+    <string name="step_min_label">Step/Min</string>
+    <string name="total_steps_label">Total Steps</string>
+    <string name="miles_label">Miles</string>
+    <string name="accumulated_mileage_label">Accumulated Mileage</string>
+    <string name="times_label">Times</string>
+    <string name="total_running_label">Total Running</string>
+    <string name="hours_label">hours</string>
+    <string name="total_hours_label">Total Hours</string>
+    <string name="average_mileage_label">Average Mileage</string>
+    <string name="average_pace_label">Average Pace</string>
+    <string name="setting_button">Setting</string>
+    <string name="share_button">Share</string>
+    <string name="home_button">Home</string>
+    <string name="set_goal_label">Set Goal</string>
+    <string name="half_marathon_label">Half Marathon</string>
+    <string name="marathon_label">Marathon</string>
+    <string name="customize_label">Customize</string>
+    <string name="confirm_label">Confirm</string>
+    <string name="blank_page_label">Start Your First Run Now!</string>
+    <string name="monitor_button">Monitor</string>
+    <string name="realtime_pace_label">Realtime Pace</string>
+    <string name="elapsed_time_label">Elapsed Time</string>
+    <string name="stop_button">Stop</string>
+    <string name="start_pause_button">Start/Pause</string>
 </resources>

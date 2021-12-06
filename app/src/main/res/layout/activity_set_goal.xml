@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".setGoalActivity">
+    tools:context=".SetGoalActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="40dp"
-            android:text="Set Goal" />
+            android:text="@string/set_goal_label" />
 
         <EditText
             android:editable="false"
@@ -37,12 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="miles" />
+            android:text="@string/miles_label" />
     </LinearLayout>
-
-
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,7 +83,7 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="Half Marathon 13.1 mi" />
+            android:text="@string/half_marathon_label" />
     </LinearLayout>
 
     <LinearLayout
@@ -102,7 +98,7 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="Marathon 26.21 mi" />
+            android:text="@string/marathon_label" />
 
         <Button
             android:id="@+id/btnCustomize"
@@ -110,7 +106,7 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="Customize" />
+            android:text="@string/customize_label" />
     </LinearLayout>
 
     <LinearLayout
@@ -125,22 +121,7 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="Confirm" />
-
+            android:text="@string/confirm_label" />
     </LinearLayout>
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1"-->
-<!--        android:orientation="horizontal">-->
-
-<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--            android:id="@+id/bottomNavigationView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="bottom"-->
-<!--            app:menu="@menu/bottom_nav_menu"/>-->
-<!--    </LinearLayout>-->
 
 </LinearLayout>

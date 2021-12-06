@@ -35,7 +35,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="Me" />
+                android:text="" />
 
             <Button
                 android:id="@+id/btnSetting"
@@ -44,7 +44,7 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
-                android:text="Setting"
+                android:text="@string/setting_button"
                 android:textSize="10dp" />
         </LinearLayout>
 
@@ -70,7 +70,7 @@
                 android:id="@+id/current_goal_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="" />
 
         </LinearLayout>
 

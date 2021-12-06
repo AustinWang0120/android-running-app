@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".testActivity">
+    tools:context=".ChattingActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/send_button"
@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Enter message" />
+            android:hint="@string/enter_message_hint" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ListView

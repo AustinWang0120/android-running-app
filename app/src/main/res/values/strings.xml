@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Joggr</string>
+
+    <!-- TODO: Remove or change all placeholder texts -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_report">reportActivity</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Password</string>
+    <string name="login_button">Login</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="display_name_label">Display Name</string>
+    <string name="male_radioButton">Male</string>
+    <string name="female_radioButton">Female</string>
+    <string name="height_label">Height(cm)</string>
+    <string name="weight_label">Weight(kg)</string>
+    <string name="gender_label">Gender</string>
+    <string name="body_info_label">Body Info</string>
+    <string name="body_info_button">Body Info</string>
+    <string name="account_setting_button">Account Setting</string>
+    <string name="sign_out_button">Sign Out</string>
+    <string name="save_button">Save</string>
+    <string name="test_checkbox">Test</string>
+    <string name="change_password_button">Change Password</string>
+</resources>

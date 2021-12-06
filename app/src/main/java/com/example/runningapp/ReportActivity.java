@@ -220,7 +220,7 @@ public class ReportActivity extends FragmentActivity implements OnMapReadyCallba
                                 uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        Toast.makeText(ReportActivity.this, "Share successfully", Toast.LENGTH_SHORT).show();
+                                        // do nothing...
                                     }
                                 });
                                 uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -238,7 +238,7 @@ public class ReportActivity extends FragmentActivity implements OnMapReadyCallba
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                         // Do nothing
-                                        Log.d(TAG, "onSuccess: Bitmap has been added to the shared_route_images successfully");
+                                        Toast.makeText(ReportActivity.this, "Share successfully", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                                 sharedUploadTask.addOnFailureListener(new OnFailureListener() {

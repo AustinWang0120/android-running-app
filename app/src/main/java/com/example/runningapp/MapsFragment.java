@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,37 +34,37 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import java.util.ArrayList;
 
 public class MapsFragment extends Fragment {
-    Button btnBacktoMonitor;
 
     public static final int PERMISSION_FINE_LOCATION = 44;
+
+    private ControlFragmentListener CFL;
+
     private GoogleMap mMap;
     private FusedLocationProviderClient client;
-    LocationRequest locationRequest;
-    LocationCallback locationCallback;
-    PolylineOptions polylineOptions;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+    private PolylineOptions polylineOptions;
     private boolean lockCamToUser = true;
     private UiSettings mUiSettings;
     private static float currentZoomLevel=20;
-    LatLng temp;
-    double alreadyRunDistance =0;
+    private LatLng temp;
+    private double alreadyRunDistance =0;
     boolean isPause=true;
+    private Button btnBackToMonitor;
 
     private ArrayList<LatLng> everySecLocationList = new ArrayList<LatLng>();
     private ArrayList<LatLng> continueLocationList = new ArrayList<LatLng>();
 
     public interface ControlFragmentListener{
-        public void sentMapMessage(double Distance,ArrayList<LatLng> alreadRunDistance,ArrayList<LatLng> continueLocation);
+        public void SendMapMessage(double Distance, ArrayList<LatLng> alreadRunDistance, ArrayList<LatLng> continueLocation);
         public void GoBackToMonitor();
     }
-    ControlFragmentListener CFL;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         CFL = (ControlFragmentListener) context;
     }
-
-
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -81,8 +80,8 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
-            mMap.moveCamera(CameraUpdateFactory.zoomTo(20)); //default zoom level
-            //check permission
+            mMap.moveCamera(CameraUpdateFactory.zoomTo(20)); // default zoom level
+            // check permission
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
             }
@@ -90,17 +89,16 @@ public class MapsFragment extends Fragment {
             mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
                 public void onMapClick(@NonNull LatLng latLng) {
-                    lockCamToUser=false;
-                    currentZoomLevel = mMap.getCameraPosition().zoom;//get current zoom level
+                    lockCamToUser = false;
+                    currentZoomLevel = mMap.getCameraPosition().zoom;// get current zoom level
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,currentZoomLevel));//set camera
                 }
             });
 
-            //add zoom+- buttons
+            // add zooming buttons
             mUiSettings = mMap.getUiSettings();
             mUiSettings.setZoomControlsEnabled(true);
             mUiSettings.setCompassEnabled(true);
-
 
             mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
                 @Override
@@ -111,32 +109,31 @@ public class MapsFragment extends Fragment {
                 }
             });
 
-            //initial fuesedloc
             client = LocationServices.getFusedLocationProviderClient(getContext());
             findMeWhenOpen();
             //initial polyline
             polylineOptions = new PolylineOptions();
 
-
-            //initial locationrequest and set request interval
+            // initial the location request and set request interval
             locationRequest = LocationRequest.create();
             locationRequest.setInterval(5000); // 5 sec
             locationRequest.setFastestInterval(1000); // 1 sec
-            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);//use one sec as callback interval
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);// use one sec as callback interval
 
 
-            //initial locationCallback to get location every second
+            // initial locationCallback to get location every second
             locationCallback = new LocationCallback() {
+
                 @Override
                 public void onLocationResult(@NonNull LocationResult locationResult) {
                     super.onLocationResult(locationResult);
                     if (!isPause) {
-                    //get location per second
+                    // get location per second
                     Location location = locationResult.getLastLocation();
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    currentZoomLevel = mMap.getCameraPosition().zoom;//get current zoom level
-                    if (lockCamToUser&&temp!=null) {
-                        //make camera and user move in same direction
+                    currentZoomLevel = mMap.getCameraPosition().zoom;// get current zoom level
+                    if (lockCamToUser && temp!=null) {
+                        // make camera and user move in same direction
                         CameraPosition cameraPosition = new CameraPosition.Builder()
                                 .target(latLng)
                                 .tilt(50)
@@ -146,22 +143,22 @@ public class MapsFragment extends Fragment {
                         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     }
 
-                    if(temp!=null)    { //has previous location
+                    if(temp!=null)    { // has previous location
                         double speed = getSpeed(latLng);
                         alreadyRunDistance += speed;//update pass distance
-                        //add a new position and draw polyline
-                        mMap.addPolyline(new PolylineOptions().add(temp,latLng));
+                        // add a new position and draw polyline
+                        mMap.addPolyline(new PolylineOptions().add(temp, latLng));
 
                     }
 
-                    temp = latLng; //update previous location
-                    everySecLocationList.add(latLng);//record location
-                    CFL.sentMapMessage(alreadyRunDistance,everySecLocationList,continueLocationList);//send info to activity
+                    temp = latLng; // update previous location
+                    everySecLocationList.add(latLng);// record location
+                    CFL.SendMapMessage(alreadyRunDistance,everySecLocationList,continueLocationList);//send info to activity
                 }
                 }
             };
 
-            //check permission
+            // check permission
             if (ActivityCompat.checkSelfPermission(getContext(),
                     Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
@@ -173,14 +170,15 @@ public class MapsFragment extends Fragment {
         }
     };
 
-    //when convert pause and continue state, update list that record location every second and location when continue pressed.
+    // when convert pause and continue state, update list that record location every second and location when continue pressed.
     public void pauseContinue(){
         isPause = !isPause;
-        if(isPause==false){
+        if(isPause == false){
             updateGPS();
         }
     }
-    //update gps for one time puporse
+
+    // update gps for one time
     private void updateGPS(){
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
@@ -192,8 +190,8 @@ public class MapsFragment extends Fragment {
             client.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-                    //after pause, when user continue running, set latest location as previous location and record them in list.
-                    //we will use these two location list when drawing routes.
+                    // after pause, when user continue running, set latest location as previous location and record them in list.
+                    // we will use these two location list when drawing routes.
                     LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
                     temp=latLng;
                     continueLocationList.add(temp);
@@ -223,8 +221,8 @@ public class MapsFragment extends Fragment {
         }
     }
 
-    //get distance between two geo location
-    //reference:https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
+    // get distance between two geo location
+    // reference:https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
     public static double getDistance(double lat1, double lat2, double lon1, double lon2) {
         lon1 = Math.toRadians(lon1);
         lon2 = Math.toRadians(lon2);
@@ -244,14 +242,13 @@ public class MapsFragment extends Fragment {
         return(c * r);
     }
 
-
     public double getSpeed( LatLng latLng )
     {
         double distance = getDistance( latLng.latitude, temp.latitude,latLng.longitude,temp.longitude);
         return (distance)/1.6 ;// 1.6 for mile unit
     }
 
-    //helper func that outputs direction of user
+    // helper func that outputs direction of user
     private float getBearing(LatLng begin, LatLng end) {
         double dLon = (end.longitude - begin.longitude);
         double x = Math.sin(Math.toRadians(dLon)) * Math.cos(Math.toRadians(end.latitude));
@@ -266,34 +263,33 @@ public class MapsFragment extends Fragment {
                 && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
         }
-        //start location update callback
+        // start location update callback
         client.requestLocationUpdates(locationRequest,locationCallback,null);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //stop location update callback
+        // stop location update callback
         client.removeLocationUpdates(locationCallback);
     }
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        //inflate the view
+        // inflate the view
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        //render map
+        // render map
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
-        //switch UI
-        btnBacktoMonitor = (Button) view.findViewById(R.id.btnBacktoMonitor);
-        btnBacktoMonitor.setOnClickListener(new View.OnClickListener() {
+        // switch UI
+        btnBackToMonitor = (Button) view.findViewById(R.id.btnBacktoMonitor);
+        btnBackToMonitor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CFL.GoBackToMonitor();
@@ -301,6 +297,4 @@ public class MapsFragment extends Fragment {
         });
         return view;
     }
-
-
 }

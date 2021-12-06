@@ -8,7 +8,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -51,7 +50,7 @@ public class MonitorFragment extends Fragment {
     FirebaseUser mUser;
 
     // User info
-    float weight = 80;
+    private float weight = 80;
 
     // Everything for the sensor
     public SensorManager sensorManager;
@@ -74,11 +73,11 @@ public class MonitorFragment extends Fragment {
     ArrayList<LatLng> everySecLocation;
 
     public interface MonitorFragmentListener {
-        public void sentMonitorMessage();
-        public void sentMusicMessage();
-        public void sentMonitorPauseContinue();
-        public void sentGoReportRequest(String startTime,String distance, String avgPace,
-                                        String duration, String Calories,String avgSteps, String totalSteps);
+        public void SendMonitorMessage();
+        public void SendMusicMessage();
+        public void SendMonitorPauseContinue();
+        public void SendGoReportRequest(String startTime, String distance, String avgPace,
+                                        String duration, String Calories, String avgSteps, String totalSteps);
     }
 
     MonitorFragmentListener MFL;
@@ -112,16 +111,19 @@ public class MonitorFragment extends Fragment {
         // Firebase
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-//        mDatabase.child("/users/" + mUser.getUid() + "/weight").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    weight = Float.parseFloat((String) task.getResult().getValue());
-//                } else {
-//                    Log.d(TAG, "onComplete: Everything works");
-//                }
-//            }
-//        });
+        mDatabase.child("/users/" + mUser.getUid() + "/weight").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    // we need to fetch the data and convert it to String by using String.valueOf first
+                    Log.d(TAG, "onComplete: " + task.getResult().getValue());
+                    String tempResult = String.valueOf(task.getResult().getValue());
+                    weight = Float.parseFloat(tempResult);
+                } else {
+                    Log.d(TAG, "onComplete: Everything works");
+                }
+            }
+        });
 
         // Sensor for steps counting
         if(ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
@@ -155,14 +157,14 @@ public class MonitorFragment extends Fragment {
         btnShowMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MFL.sentMonitorMessage();
+                MFL.SendMonitorMessage();
             }
         });
 
         btnShowMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MFL.sentMusicMessage();
+                MFL.SendMusicMessage();
             }
         });
 
@@ -170,7 +172,7 @@ public class MonitorFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 running=!running;
-                MFL.sentMonitorPauseContinue();
+                MFL.SendMonitorPauseContinue();
             }
         });
 
@@ -188,7 +190,7 @@ public class MonitorFragment extends Fragment {
             @Override
             public boolean onLongClick(View view) {
                 running=!running;
-                MFL.sentGoReportRequest(startTime, runDistance, pace, duration, calories, avgSteps, totalSteps);
+                MFL.SendGoReportRequest(startTime, runDistance, pace, duration, calories, avgSteps, totalSteps);
                 return true;
             }
         });
@@ -264,11 +266,11 @@ public class MonitorFragment extends Fragment {
 
     public void setMonitorData(double Distance, ArrayList<LatLng> everySecLocationFromMap){
         // Calculate the distance and convert it to String
-        distance = Math.round(Distance*100.0)/100.0;
+        distance = Math.round(Distance*100.0) / 100.0;
         runDistance = String.valueOf(distance);
 
         // Progress
-        double rate = (Distance/goalDistance);
+        double rate = (Distance / goalDistance);
         int percent = (int) (Math.round(rate*100.0));
         tvCurrentRunDistance.setText(String.valueOf(distance));
         if(percent>0) {

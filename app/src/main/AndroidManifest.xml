@@ -62,9 +62,6 @@
             android:name=".OneForAll"
             android:exported="true" />
         <activity
-            android:name=".MonitorActivity"
-            android:exported="true" />
-        <activity
             android:name=".SetGoalActivity"
             android:exported="true" />
         <activity
@@ -74,13 +71,7 @@
             android:name=".MeActivity"
             android:exported="true" />
         <activity
-            android:name=".RunPrepareActivity"
-            android:exported="true" />
-        <activity
             android:name=".DetailOfOneRecord"
-            android:exported="true" />
-        <activity
-            android:name=".groupOfRuns"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

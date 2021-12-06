@@ -138,22 +138,23 @@ public class OneForAll extends AppCompatActivity implements MapsFragment.Control
     @Override
     protected void onStart() {
         super.onStart();
+        // find the map fragment and start it as default
         mf = (MonitorFragment) getSupportFragmentManager().findFragmentByTag("tagMonitor");
         mf.setMonitorGoal(goal);
     }
 
     @Override
-    public void sentMapMessage(double Distance, ArrayList<LatLng> everSecLocation,ArrayList<LatLng> continueLocation) {
+    public void SendMapMessage(double Distance, ArrayList<LatLng> everSecLocation, ArrayList<LatLng> continueLocation) {
         mf = (MonitorFragment) getSupportFragmentManager().findFragmentByTag("tagMonitor");
-        mf.setMonitorData(Distance,everSecLocation);
+        mf.setMonitorData(Distance, everSecLocation);
         mf.setMonitorGoal(goal);
-
         everySecLocationOFA = everSecLocation;
         continueLocationOFA = continueLocation;
     }
 
     @Override
     public void GoBackToMonitor() {
+        // hide the map and show the monitor
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.hide(mapFragment);
         ft.show(monitorFragment);
@@ -161,16 +162,17 @@ public class OneForAll extends AppCompatActivity implements MapsFragment.Control
     }
 
     @Override
-    public void sentMonitorMessage() {
+    public void SendMonitorMessage() {
+        // hide the monitor and show the map
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.hide(monitorFragment);
         ft.show(mapFragment);
         ft.commit();
-
     }
 
     @Override
-    public void sentMusicMessage() {
+    public void SendMusicMessage() {
+        // hide everything and show the spotify page
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.hide(monitorFragment);
         ft.hide(mapFragment);
@@ -179,17 +181,16 @@ public class OneForAll extends AppCompatActivity implements MapsFragment.Control
     }
 
     @Override
-    public void sentMonitorPauseContinue() {
+    public void SendMonitorPauseContinue() {
         MapsFragment mp = (MapsFragment) getSupportFragmentManager().findFragmentByTag("tagMap");
-        mp.pauseContinue();//switch
-
+        mp.pauseContinue();
     }
 
     /**
      * Put all info in the bundle and push to the ReportActivity
      * */
     @Override
-    public void sentGoReportRequest(String startTime, String distance, String avgPace,
+    public void SendGoReportRequest(String startTime, String distance, String avgPace,
                                     String duration, String calories, String avgSteps, String totalSteps) {
         Intent goReportActivity = new Intent(getBaseContext(), ReportActivity.class);
         goReportActivity.putExtra("startTime", startTime);
@@ -211,7 +212,8 @@ public class OneForAll extends AppCompatActivity implements MapsFragment.Control
     }
 
     @Override
-    public void BacktoControl() {
+    public void BackToControl() {
+        // hide the spotify page ann show the monitor
         FragmentTransaction ft = fragmentManager.beginTransaction ();
         ft.hide(spotifyFragment);
         ft.show(monitorFragment);
@@ -220,6 +222,7 @@ public class OneForAll extends AppCompatActivity implements MapsFragment.Control
 
     @Override
     protected void onDestroy() {
+        // clear the spotify authorization token
         super.onDestroy();
         AuthorizationClient.clearCookies(this);
     }

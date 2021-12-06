@@ -1,7 +1,6 @@
 package com.example.runningapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
@@ -27,7 +25,6 @@ import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.protocol.client.CallResult;
 import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
-import com.spotify.sdk.android.auth.AuthorizationClient;
 
 
 import java.util.ArrayList;
@@ -36,7 +33,6 @@ import java.util.List;
 
 import kaaes.spotify.webapi.android.models.Pager;
 import kaaes.spotify.webapi.android.models.PlaylistSimple;
-import retrofit.client.Response;
 
 
 public class spotifyFragment extends Fragment {
@@ -106,7 +102,7 @@ public class spotifyFragment extends Fragment {
         backToMonitor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MBC.BacktoControl();
+                MBC.BackToControl();
             }
         });
 
@@ -214,7 +210,7 @@ public class spotifyFragment extends Fragment {
      * Interface for fragment communication
      * */
     public interface MusicBackToControl {
-        public void BacktoControl(); //
+        public void BackToControl(); //
     }
     MusicBackToControl MBC;
 
@@ -333,30 +329,6 @@ public class spotifyFragment extends Fragment {
 
         }
     }
-
-//    class friendListListener implements AdapterView.OnItemSelectedListener {
-//
-//        @Override
-//        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//            if (i == 0) {
-//                return;
-//            }
-//            /**
-//             * 在这发送消息
-//             * Share选中朋友：发送当前歌曲URI
-//             *
-//             * */
-//            Toast.makeText(getContext(),"choose friend",Toast.LENGTH_SHORT).show();
-////            mSpotifyAppRemote.getPlayerApi().play("spotify:track:1r9xUipOqoNwggBpENDsvJ");
-//
-//        }
-//
-//        @Override
-//        public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//        }
-//    }
-
 }
 
 

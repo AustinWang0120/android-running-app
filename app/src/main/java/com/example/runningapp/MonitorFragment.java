@@ -57,6 +57,7 @@ public class MonitorFragment extends Fragment {
     public int steps = 0;
     public int counter = 0;
     public int previousTotalSteps = 0;
+    public int offset = 1;
 
     SeekBar sbRunProgress;
     TextView tvGoal, tvRunProgressPercentage, tvCurrentRunDistance, tvPace, tvTimePass, tvCalorie;
@@ -205,7 +206,7 @@ public class MonitorFragment extends Fragment {
             Log.i(TAG, "Sensor Event Values: " + sensorEvent.values[0] );
             int numSteps = (int) sensorEvent.values[0] - previousTotalSteps;
 
-            if( counter == 5 ) {
+            if( counter == offset ) {
                 steps++;
                 counter = 0;
             } else {

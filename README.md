@@ -1,2 +1,1 @@
-# running-app
-# android-running-app
+![Android Running App](/Joggr-README.png)
